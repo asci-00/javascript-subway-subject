@@ -24,11 +24,13 @@ export const TAB_ATTRS = Object.freeze([
 export const SELECTORS = Object.freeze({
     MAIN_SECTION_ID: 'main-section',
     MANAGE_STATION: {
+        FORM_ID: 'station-form',
         NAME_INPUT_ID: 'station-name-input',
         ADD_BUTTON_ID: 'station-add-button',
         DELETE_BUTTON_CLASS: 'station-delete-button',
     },
     MANAGE_LINE: {
+        FORM_ID: 'line-form',
         NAME_INPUT_ID: 'line-name-input',
         START_STATION_ID: 'line-start-station-selector',
         END_STATION_ID: 'line-end-station-selector',
@@ -36,6 +38,7 @@ export const SELECTORS = Object.freeze({
         DELETE_BUTTON_CLASS: 'line-delete-button',
     },
     MANAGE_SECTION: {
+        FORM_ID: 'section-form',
         LINE_MENU_BUTTON_CLASS: 'section-line-menu-button',
         SELECTOR: 'section-station-selector',
         ORDER_INPUT_ID: 'section-order-input',
@@ -49,6 +52,6 @@ export const SELECTORS = Object.freeze({
 
 export const defaultStatus = Object.freeze({
     routeStatus: 'MANAGE_STATION',
-    stations: [{ label: '수원역', id: 0 }], // { label: string, id: number } [ ]
-    lines: {}, // { name: string, start: number(id), end: number(id), path: number [ ] }
+    stations: ['수원역'], // { label: string, id: number } [ ]
+    lines: [], // { name: string, start: number(id), end: number(id), path: number [ ] }
 });

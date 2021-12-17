@@ -15,9 +15,12 @@ export default class Component {
 
     mount() {}
 
+    willmount() {}
+
     template() {}
 
     render() {
+        this.willmount();
         $(this.target).innerHTML = this.template();
         this.mount();
     }

@@ -15,7 +15,6 @@ export default class ManageStation extends Component {
     mount() {
         this.stations = getState((state) => state.stations);
 
-        this.delegateEvent();
         this.table.setConfig({
             columns: [
                 { label: '역 이름', key: 'label' },
@@ -32,29 +31,26 @@ export default class ManageStation extends Component {
                         </button>`,
                 },
             ],
-            data: this.stations,
+            data: this.stations.map((station) => ({ label: station })),
         });
 
         this.table.render();
+        this.delegateEvent();
     }
 
     delegateEvent() {
-        setEvent('change', this.uid + this.selectors.NAME_INPUT_ID, this.onChange.bind(this));
-        setEvent('click', this.uid + this.selectors.ADD_BUTTON_ID, this.onClick.bind(this));
+        setEvent('submit', this.uid + this.selectors.FORM_ID, this.onSubmit.bind(this));
         setEvent('click', this.uid + this.selectors.DELETE_BUTTON_CLASS, this.onItemDelete.bind(this));
     }
 
-    onChange(ev) {
-        this.name = ev.target.value;
-    }
+    onSubmit(ev) {
+        ev.preventDefault();
 
-    onClick(ev) {
-        if (!isValidName(this.name)) return;
+        const { value } = ev.target.label;
 
-        const nextId = this.stations[this.stations.length - 1].id + 1;
-        setState('stations', [...this.stations, { label: this.name, id: nextId }]);
+        if (!isValidName(value)) return;
 
-        this.name = '';
+        setState('stations', [...this.stations, value]);
     }
 
     onItemDelete({ target }) {
@@ -69,18 +65,14 @@ export default class ManageStation extends Component {
     template() {
         return `
             <h3>역 이름</h3>
-            <input  type="text"
-                    data-event-id="${this.uid + this.selectors.NAME_INPUT_ID}"
-                    id="this.selectors.NAME_INPUT_ID"
-                    value="${this.name}"
-            />
-            <input  type="button"
-                    data-event-id="${this.uid + this.selectors.ADD_BUTTON_ID}"
-                    id="${this.selectors.ADD_BUTTON_ID}"
-                    value="역 추가"
-            />
+            <form data-event-id="${this.uid + this.selectors.FORM_ID}" id="${this.selectors.FORM_ID}">
+                <input type="text" id="${this.selectors.NAME_INPUT_ID}" name="label"/>
+                <input  type="submit"
+                        id="${this.selectors.ADD_BUTTON_ID}"
+                        value="역 추가"
+                />
+            </form>
             <h1>🚄지하철 역 목록</h1>
-
             <div id="table-view"></div>
         `;
     }

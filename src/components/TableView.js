@@ -2,8 +2,8 @@ import Component from '../interface/component.js';
 
 export default class Table extends Component {
     setConfig(configuration) {
-        this.columns = configuration.columns;
-        this.data = configuration.data;
+        this.columns = configuration.columns ?? [];
+        this.data = configuration.data ?? [];
     }
 
     itemTemplate(data, idx) {

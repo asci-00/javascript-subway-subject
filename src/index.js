@@ -16,6 +16,7 @@ import { createStore, subscribe } from './store/index.js';
     watch(rootTarget);
     addEventType('click');
     addEventType('change');
+    addEventType('submit');
 
     rootComponent.render();
 })();

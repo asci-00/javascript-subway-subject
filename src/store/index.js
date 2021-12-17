@@ -7,7 +7,7 @@ class Store {
             this.state = JSON.parse(this.storage);
         } else this.state = {};
 
-        window.onunload = () => localStorage.removeItem('state');
+        //window.onunload = () => localStorage.removeItem('state');
     }
     createStore(initialization) {
         if (this.storage !== null) return;
